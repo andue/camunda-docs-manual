@@ -25,6 +25,7 @@ This document guides you through the update from Camunda Platform `7.14.x` to `7
 1. For developers: [DMN Model API generates DMN 1.3 diagrams](#dmn-model-api-generates-dmn-1-3-diagrams)
 1. For developers: [Changes to the Webapp Config Files](#changes-to-the-webapp-config-files)
 1. For developers: [New Frontend Plugin System for all Webapps](#new-frontend-plugin-system-for-all-webapps)
+1. For administrators and developers: [PostgreSQL Support Clarification](#postgresql-support-clarification)
 
 This guide covers mandatory migration steps as well as optional considerations for the initial configuration of new functionality included in Camunda Platform 7.15.
 
@@ -291,3 +292,19 @@ Plugins created for Camunda Platform 7.13 or earlier can be included for compati
 
 Please note that all Plugins with this prefix will be included using the 7.13 plugin mechanism. You cannot create new Plugins with IDs starting with `legacy`.
 
+# PostgreSQL Support Clarification
+
+According to the [PostgreSQL versioning documentation][postgresql-versioning], the PostgreSQL versioning
+scheme changed from PostgreSQL 10. For versions before PostgreSQL 10, a major version was marked by the first two 
+version numbers, e.g. `9.4`, `9.6`. From PostgreSQL 10, a major version is marked by a single version number, e.g. `10`,
+`11`, `12`. 
+
+As this was only a change to the versioning scheme, the content of the minor releases (e.g. `9.4.6`, 
+`9.6.18`, `10.13`, `11.2`, etc.) didn't change. Therefore, we have updated the [Camunda Supported Environments][supported-environments], 
+to reflect that Camunda supports all the minor version updates of a major PostgreSQL version.
+
+Note that this adjustment doesn't change the supported versions of Amazon Aurora PostgreSQL. This is a database
+service built on top of PostgreSQL, and as such, needs to be tested for support separately from PostgreSQL.
+
+[postgresql-versioning]: https://www.postgresql.org/support/versioning/
+[supported-environments]: {{< ref "/introduction/supported-environments.md#supported-database-products" >}}
